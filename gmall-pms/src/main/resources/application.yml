@@ -36,3 +36,5 @@ feign:
   sentinel:
     enabled: true
 
+
+

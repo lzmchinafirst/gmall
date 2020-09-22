@@ -2,6 +2,7 @@ package com.atguigu.gmall.wms.controller;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atguigu.gmall.wms.entity.WareSkuEntity;
@@ -33,6 +33,18 @@ public class WareSkuController {
 
     @Autowired
     private WareSkuService wareSkuService;
+
+    /**
+     * 获取摸个sku的库存信息
+     */
+    @GetMapping("sku/{skuId}")
+    @ApiOperation("根据某个sku的id获得该sku的库存信息")
+    public ResponseVo<List<WareSkuEntity>> queryWareSkuByItId(@PathVariable("skuId")Long skuId) {
+        QueryWrapper<WareSkuEntity> wrapper = new QueryWrapper<>();
+        wrapper.eq("sku_id",skuId);
+        List<WareSkuEntity> list = this.wareSkuService.list(wrapper);
+        return ResponseVo.ok(list);
+    }
 
     /**
      * 列表

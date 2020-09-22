@@ -35,6 +35,16 @@ public class SpuController {
     private SpuService spuService;
 
     /**
+     * 查询spu列表
+     */
+    @GetMapping("category/{categoryId}")
+    @ApiOperation("分页条件查询spu列表")
+    public ResponseVo<PageResultVo> qeurySpuByCategoryId(@PathVariable("categoryId")Long cid,PageParamVo pageParamVo) {
+        PageResultVo pageResultVo = this.spuService.querySpuByCategoryId(cid,pageParamVo);
+        return ResponseVo.ok(pageResultVo);
+    }
+
+    /**
      * 列表
      */
     @GetMapping
