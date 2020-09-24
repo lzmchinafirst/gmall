@@ -10,9 +10,8 @@ import com.atguigu.gmall.pms.vo.SpuAttrValueEntityVo;
 import com.atguigu.gmall.pms.vo.SpuEntityVo;
 import com.atguigu.gmall.sms.vo.SkuSaleVo;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.sun.webkit.dom.CSSPrimitiveValueImpl;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang3.StringUtils;
-import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +27,7 @@ import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 
 import com.atguigu.gmall.pms.service.SpuService;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("spuService")
@@ -82,6 +82,7 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
      * @param spuVo
      */
     @Override
+    @GlobalTransactional
     public void saveSpuEntityVo(SpuEntityVo spuVo) {
         //第一步：保存数据到pms_spu
         Long spuId = saveSpu(spuVo);
@@ -91,6 +92,7 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
         saveSpuAttr(spuVo, spuId);
         //第四步：保存数据到pms_sku
         saveSku(spuVo, spuId);
+        int a = 10 / 0;
     }
 
     private void saveSku(SpuEntityVo spuVo, Long spuId) {
