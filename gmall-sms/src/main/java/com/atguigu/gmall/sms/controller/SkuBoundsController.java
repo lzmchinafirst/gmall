@@ -2,6 +2,7 @@ package com.atguigu.gmall.sms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.sms.vo.SkuSaleVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,12 @@ public class SkuBoundsController {
     public ResponseVo delete(@RequestBody List<Long> ids){
 		skuBoundsService.removeByIds(ids);
 
+        return ResponseVo.ok();
+    }
+
+    @PostMapping("/skusale/save")
+    public ResponseVo skuSave(@RequestBody SkuSaleVo skuSaleVo) {
+        skuBoundsService.skuSave(skuSaleVo);
         return ResponseVo.ok();
     }
 

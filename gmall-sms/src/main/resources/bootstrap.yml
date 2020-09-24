@@ -1,6 +1,6 @@
 spring:
   application:
-    name: pms-service
+    name: sms-service
   cloud:
     nacos:
       config:

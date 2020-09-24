@@ -8,6 +8,7 @@ class GmallPmsApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }
