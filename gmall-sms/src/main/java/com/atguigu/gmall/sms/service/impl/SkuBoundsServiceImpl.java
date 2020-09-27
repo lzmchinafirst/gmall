@@ -22,6 +22,7 @@ import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.sms.mapper.SkuBoundsMapper;
 import com.atguigu.gmall.sms.entity.SkuBoundsEntity;
 import com.atguigu.gmall.sms.service.SkuBoundsService;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("skuBoundsService")
@@ -50,6 +51,7 @@ public class SkuBoundsServiceImpl extends ServiceImpl<SkuBoundsMapper, SkuBounds
      * @param skuSaleVo
      */
     @Override
+    @Transactional
     public void skuSave(SkuSaleVo skuSaleVo) {
         if(skuSaleVo != null) {
             //第一步：向sms_sku_bond表中添加数据

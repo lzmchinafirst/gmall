@@ -92,7 +92,7 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
         saveSpuAttr(spuVo, spuId);
         //第四步：保存数据到pms_sku
         saveSku(spuVo, spuId);
-        int a = 10 / 0;
+        //int a = 10 / 0;
     }
 
     private void saveSku(SpuEntityVo spuVo, Long spuId) {

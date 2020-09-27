@@ -20,6 +20,7 @@
         <module>gmall-admin</module>
         <module>gmall-common</module>
         <module>gmall-sms-interface</module>
+        <module>spring-elasticsearch</module>
     </modules>
 
     <properties>

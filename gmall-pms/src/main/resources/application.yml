@@ -10,6 +10,11 @@ spring:
       transport:
         dashboard: localhost:8080
         port: 8719
+    alibaba:
+      seata:
+        tx-service-group: gmall_tx_group
+
+
   redis:
     host: 192.168.111.168
   zipkin:
@@ -35,6 +40,5 @@ mybatis-plus:
 feign:
   sentinel:
     enabled: true
-
 
 
