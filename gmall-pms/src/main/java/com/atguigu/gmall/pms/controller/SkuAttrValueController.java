@@ -46,6 +46,14 @@ public class SkuAttrValueController {
     }
 
 
+    @GetMapping("sku/{skuId}/{categoryId}")
+    @ApiOperation("根据skuid以及categoryid查询对应的sku_attr_value的值")
+    public ResponseVo<List<SkuAttrValueEntity>> querySkuAttrByCategoryIdAndSkuId(@PathVariable("skuId")Long skuId,
+                                                                                 @PathVariable("categoryId")Long categoryId) {
+        List<SkuAttrValueEntity> list =  this.skuAttrValueService.querySkuAttrByCategoryIdAndSkuId(skuId, categoryId);
+        return ResponseVo.ok(list);
+    }
+
     /**
      * 信息
      */

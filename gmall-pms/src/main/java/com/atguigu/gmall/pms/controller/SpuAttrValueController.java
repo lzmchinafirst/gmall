@@ -47,6 +47,20 @@ public class SpuAttrValueController {
 
 
     /**
+     * 根据对应的spuid查询对应的spu_attr_value
+     * @param spuId
+     * @return
+     */
+    @GetMapping("spu/{spuId}/{categoryId}")
+    @ApiOperation("根据对应的spuId查询对应的spu_attr_value")
+    public ResponseVo<List<SpuAttrValueEntity>> querySpuAttrValueBySpuIdAndCategoryId(@PathVariable("spuId")Long spuId,
+                                                                                      @PathVariable("categoryId")Long categoryId) {
+        List<SpuAttrValueEntity> list =  this.spuAttrValueService.querySpuAttrValueBySpuIdAndCategoryId(spuId,categoryId);
+        return ResponseVo.ok(list);
+    }
+
+
+    /**
      * 信息
      */
     @GetMapping("{id}")

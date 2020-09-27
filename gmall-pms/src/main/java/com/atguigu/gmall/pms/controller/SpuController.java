@@ -56,6 +56,17 @@ public class SpuController {
         return ResponseVo.ok(pageResultVo);
     }
 
+    /**
+     * 根据上传的分页数据返回对应的json信息
+     */
+    @PostMapping("page/json")
+    @ApiOperation("返回对应的spu的json")
+    public ResponseVo<List<SpuEntity>> querySpuJson(PageParamVo paramVo){
+        PageResultVo pageResultVo = spuService.queryPage(paramVo);
+        List<SpuEntity> list = (List<SpuEntity>) pageResultVo.getList();
+        return ResponseVo.ok(list);
+    }
+
 
     /**
      * 信息
