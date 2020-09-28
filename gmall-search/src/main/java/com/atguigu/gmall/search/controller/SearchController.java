@@ -2,6 +2,7 @@ package com.atguigu.gmall.search.controller;
 
 import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.search.pojo.SearchParamVo;
+import com.atguigu.gmall.search.pojo.SearchResponseVo;
 import com.atguigu.gmall.search.service.SearchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,8 +23,8 @@ public class SearchController {
 
     @GetMapping
     @ApiOperation("根据上传的条件进行检索")
-    public ResponseVo<Object> search(SearchParamVo searchParamVo){
-        this.searchService.search(searchParamVo);
-        return ResponseVo.ok();
+    public ResponseVo<SearchResponseVo> search(SearchParamVo searchParamVo){
+        SearchResponseVo search = this.searchService.search(searchParamVo);
+        return ResponseVo.ok(search);
     }
 }

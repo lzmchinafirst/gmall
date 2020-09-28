@@ -20,10 +20,13 @@ spring:
   elasticsearch:
     rest:
       uris: http://192.168.111.168:9200
+  jackson:
+    default-property-inclusion: non_null
 feign:
   sentinel:
     enabled: true
 logging:
   level:
     com.atguigu.gmall: info
+
 
