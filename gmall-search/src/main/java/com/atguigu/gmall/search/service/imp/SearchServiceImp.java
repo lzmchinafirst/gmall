@@ -3,7 +3,6 @@ package com.atguigu.gmall.search.service.imp;
 import com.atguigu.gmall.search.pojo.SearchParamVo;
 import com.atguigu.gmall.search.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.lucene.util.QueryBuilder;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -14,7 +13,6 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Operators;
 
 import java.io.IOException;
 
