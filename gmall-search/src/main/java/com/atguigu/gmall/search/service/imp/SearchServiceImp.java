@@ -2,6 +2,7 @@ package com.atguigu.gmall.search.service.imp;
 
 import com.atguigu.gmall.search.pojo.SearchParamVo;
 import com.atguigu.gmall.search.service.SearchService;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class SearchServiceImp implements SearchService {
@@ -41,10 +43,27 @@ public class SearchServiceImp implements SearchService {
             //TODO 这里可以插入广告
             return searchSourceBuilder;
         }
-        //1.匹配查询
+        //1.匹配查询（搜索框上传）
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         searchSourceBuilder.query(boolQueryBuilder);
         boolQueryBuilder.must(QueryBuilders.matchQuery("title",keyword).operator(Operator.AND));
+
+        //2.过滤查询
+        //2.1品牌过滤
+        List<Long> brandIdList = searchParamVo.getBrandId();
+        if(CollectionUtils.isNotEmpty(brandIdList)) {
+            boolQueryBuilder.filter(QueryBuilders.termsQuery("brandId",brandIdList));
+        }
+
+        //2.2分类过滤
+        List<Long> cid3 = searchParamVo.getCid3();
+        if(CollectionUtils.isNotEmpty(cid3)) {
+            boolQueryBuilder.filter(QueryBuilders.termsQuery("categoryId",cid3));
+        }
+
+        //2.3价格过滤
+        Double priceFrom = searchParamVo.getPriceFrom();
+        Double priceTo = searchParamVo.getPriceTo();
 
 
         System.out.println(searchSourceBuilder);
