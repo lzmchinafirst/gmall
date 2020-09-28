@@ -41,6 +41,7 @@ public class SearchServiceImp implements SearchService {
             //TODO 这里可以插入广告
             return searchSourceBuilder;
         }
+        //1.匹配查询
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         searchSourceBuilder.query(boolQueryBuilder);
         boolQueryBuilder.must(QueryBuilders.matchQuery("title",keyword).operator(Operator.AND));
