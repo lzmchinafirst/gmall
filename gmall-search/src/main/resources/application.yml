@@ -22,11 +22,12 @@ spring:
       uris: http://192.168.111.168:9200
   jackson:
     default-property-inclusion: non_null
+  thymeleaf:
+    cache: false
 feign:
   sentinel:
     enabled: true
 logging:
   level:
     com.atguigu.gmall: info
-
 

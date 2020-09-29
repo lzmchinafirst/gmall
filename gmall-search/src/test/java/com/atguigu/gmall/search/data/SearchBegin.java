@@ -34,6 +34,9 @@ public class SearchBegin {
     @Autowired
     private WmsClient wmsClient;
 
+    /**
+     * 创建索引和类型
+     */
     @Test
     void createIndex() {
         this.restTemplate.createIndex(Goods.class);
@@ -49,8 +52,9 @@ public class SearchBegin {
             pageParamVo.setPageNum(pageNum);
             pageParamVo.setPageSize(pageSize);
             ResponseVo<List<SpuEntity>> responseVo =
-                    pmsClient.querySpuJson(pageParamVo);
+                    this.pmsClient.querySpuJson(pageParamVo);
             List<SpuEntity> spus = responseVo.getData();
+            System.out.println("spus = " + spus);
             if(CollectionUtils.isEmpty(spus)) {
                 continue;
             }

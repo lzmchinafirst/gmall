@@ -7,13 +7,14 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 public interface PmsApi {
     //查询spu
     @PostMapping("pms/spu/page/json")
-    public ResponseVo<List<SpuEntity>> querySpuJson(PageParamVo paramVo);
+    public ResponseVo<List<SpuEntity>> querySpuJson(@RequestBody PageParamVo paramVo);
 
     //根据spu的id以及categoryId查询对应的sku_attr_value
     @GetMapping("pms/spuattrvalue/spu/{spuId}/{categoryId}")

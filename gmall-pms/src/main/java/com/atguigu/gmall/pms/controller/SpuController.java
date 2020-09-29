@@ -61,7 +61,9 @@ public class SpuController {
      */
     @PostMapping("page/json")
     @ApiOperation("返回对应的spu的json")
-    public ResponseVo<List<SpuEntity>> querySpuJson(PageParamVo paramVo){
+    public ResponseVo<List<SpuEntity>> querySpuJson(@RequestBody PageParamVo paramVo){
+        System.out.println("--------------------------------------");
+        System.out.println(paramVo);
         PageResultVo pageResultVo = spuService.queryPage(paramVo);
         List<SpuEntity> list = (List<SpuEntity>) pageResultVo.getList();
         return ResponseVo.ok(list);
