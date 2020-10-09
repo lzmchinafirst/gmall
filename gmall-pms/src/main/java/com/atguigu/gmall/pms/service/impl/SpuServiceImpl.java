@@ -12,6 +12,7 @@ import com.atguigu.gmall.sms.vo.SkuSaleVo;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,9 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
     @Autowired
     private SmsApiClient smsApiClient;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
     @Override
     public PageResultVo queryPage(PageParamVo paramVo) {
         IPage<SpuEntity> page = this.page(
@@ -84,7 +88,7 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
     @Override
     @GlobalTransactional
     public void saveSpuEntityVo(SpuEntityVo spuVo) {
-        //第一步：保存数据到pms_spu
+        //第一步：保存数据到pms_spu，并且将数据同步到gmall_search模块中
         Long spuId = saveSpu(spuVo);
         //第二步：保存数据到pms_spu_desc
         saveSpuDesc(spuVo, spuId);
@@ -93,6 +97,8 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
         //第四步：保存数据到pms_sku
         saveSku(spuVo, spuId);
         //int a = 10 / 0;
+        //第五步：同步到gmall-search模块
+        this.rabbitTemplate.convertAndSend("PMS_ITEM_EXCAHNG","ITEM.INSERT",spuId);
     }
 
     private void saveSku(SpuEntityVo spuVo, Long spuId) {

@@ -1,4 +1,3 @@
-
 server:
   port: 18082
 spring:
@@ -13,8 +12,6 @@ spring:
     alibaba:
       seata:
         tx-service-group: gmall_tx_group
-
-
   redis:
     host: 192.168.111.168
   zipkin:
@@ -30,6 +27,13 @@ spring:
     url: jdbc:mysql://localhost:3306/guli_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: woshiniba123
+  rabbitmq:
+    host: 192.168.111.168
+    virtual-host: /lzm
+    username: lzm
+    password: lzm
+    publisher-returns: true
+    publisher-confirm-type: correlated
 
 mybatis-plus:
   mapper-locations: classpath:mapper/pms/*.xml

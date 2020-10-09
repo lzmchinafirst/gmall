@@ -24,10 +24,19 @@ spring:
     default-property-inclusion: non_null
   thymeleaf:
     cache: false
+  rabbitmq:
+    host: 192.168.111.168
+    virtual-host: /lzm
+    username: lzm
+    password: lzm
+    listener:
+      simple:
+        prefetch: 1
+        concurrency: 3
+        acknowledge-mode: manual
 feign:
   sentinel:
     enabled: true
 logging:
   level:
     com.atguigu.gmall: info
-

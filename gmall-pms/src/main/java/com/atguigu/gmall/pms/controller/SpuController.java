@@ -85,7 +85,7 @@ public class SpuController {
      * 保存
      */
     @PostMapping
-    @ApiOperation("保存")
+    @ApiOperation("大保存")
     public ResponseVo<Object> save(@RequestBody SpuEntityVo spu){
 		this.spuService.saveSpuEntityVo(spu);
         return ResponseVo.ok();

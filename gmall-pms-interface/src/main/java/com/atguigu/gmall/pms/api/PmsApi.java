@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 public interface PmsApi {
+
+    //根据id查询对应的spu信息
+    @GetMapping("pms/spu/{id}")
+    public ResponseVo<SpuEntity> querySpuById(@PathVariable("id") Long id);
     //查询spu
     @PostMapping("pms/spu/page/json")
     public ResponseVo<List<SpuEntity>> querySpuJson(@RequestBody PageParamVo paramVo);
