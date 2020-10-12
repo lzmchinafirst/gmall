@@ -33,6 +33,14 @@ public interface PmsApi {
     @GetMapping("pms/category/{id}")
     public ResponseVo<CategoryEntity> queryCategoryById(@PathVariable("id") Long id);
 
+    //根据pid查询对应的类别的集合
+    @GetMapping("pms/category/parent/{parentId}")
+    public ResponseVo<List<CategoryEntity>> queryCategoryByParentId(@PathVariable("parentId")Long parentId);
+
+    //根据分类的一级id查询其对应的所有的分类信息
+    @GetMapping("pms/category/getCategories/{cid}")
+    public ResponseVo<List<CategoryEntity>> queryCategories(@PathVariable("cid")Long cid);
+
     //根据品牌的id查询具体的品牌信息
     @GetMapping("pms/brand/{id}")
     public ResponseVo<BrandEntity> queryBrandById(@PathVariable("id") Long id);

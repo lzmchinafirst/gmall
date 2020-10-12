@@ -2,6 +2,7 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.entity.CategoryEntityExtend;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,12 @@ public class CategoryController {
     public ResponseVo<List<CategoryEntity>> queryCategoryByParentId(@PathVariable("parentId")Long parentId) {
         List<CategoryEntity> categorys = this.categoryService.queryCategoryByParentId(parentId);
         return ResponseVo.ok(categorys);
+    }
+
+    @GetMapping("getCategories/{cid}")
+    public ResponseVo<List<CategoryEntity>> queryCategories(@PathVariable("cid")Long cid) {
+        List<CategoryEntity> subs = this.categoryService.queryCategories(cid);
+        return ResponseVo.ok(subs);
     }
 
 
