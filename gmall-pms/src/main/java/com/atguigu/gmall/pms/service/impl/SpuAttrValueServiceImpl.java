@@ -2,6 +2,7 @@ package com.atguigu.gmall.pms.service.impl;
 
 import com.atguigu.gmall.pms.entity.AttrEntity;
 import com.atguigu.gmall.pms.mapper.AttrMapper;
+import com.atguigu.gmall.pms.vo.SaleAttrValueVo;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,4 +51,6 @@ public class SpuAttrValueServiceImpl extends ServiceImpl<SpuAttrValueMapper, Spu
         List<Long> collect = attrEntityList.stream().map(AttrEntity::getId).collect(Collectors.toList());
         return this.list(new QueryWrapper<SpuAttrValueEntity>().eq("spu_id",spuId).in("attr_id",collect));
     }
+
+
 }

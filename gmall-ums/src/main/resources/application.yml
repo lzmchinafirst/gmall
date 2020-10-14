@@ -26,6 +26,15 @@ spring:
     username: root
     password: woshiniba123
 
+  rabbitmq:
+    host: 192.168.111.168
+    port: 5672
+    virtual-host: /lzm
+    username: lzm
+    password: lzm
+    publisher-confirm-type: correlated
+    publisher-returns: true
+
 mybatis-plus:
   mapper-locations: classpath:mapper/ums/*.xml
   type-aliases-package: com.atguigu.gmall.ums.entity
@@ -35,4 +44,5 @@ mybatis-plus:
 feign:
   sentinel:
     enabled: true
+
 

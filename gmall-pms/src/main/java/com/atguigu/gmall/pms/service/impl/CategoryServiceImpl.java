@@ -1,9 +1,11 @@
 package com.atguigu.gmall.pms.service.impl;
 
+import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.pms.entity.CategoryEntityExtend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -47,6 +49,22 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
     public List<CategoryEntity> queryCategories(Long cid) {
         List<CategoryEntity> subs = this.categoryMapper.queryCategories(cid);
         return subs;
+    }
+
+    @Override
+    public List<CategoryEntity> queryAllCategoriesByLv3Id(Long cid3) {
+        List<CategoryEntity> categoryEntityList = new ArrayList<>();
+        CategoryEntity categoryEntityLv3 = this.categoryMapper.selectById(cid3);
+        if(categoryEntityLv3 != null) {
+            categoryEntityList.add(categoryEntityLv3);
+            Long cid2 = categoryEntityLv3.getParentId();
+            CategoryEntity categoryEntityLv2 = this.categoryMapper.selectById(cid2);
+            categoryEntityList.add(categoryEntityLv2);
+            Long cid = categoryEntityLv2.getParentId();
+            CategoryEntity categoryEntityLv1 = this.categoryMapper.selectById(cid);
+            categoryEntityList.add(categoryEntityLv1);
+        }
+        return categoryEntityList;
     }
 
 }

@@ -2,6 +2,7 @@ package com.atguigu.gmall.index.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.gmall.common.bean.ResponseVo;
+import com.atguigu.gmall.index.annotation.GmallCache;
 import com.atguigu.gmall.index.feign.GmallPmsClient;
 import com.atguigu.gmall.index.service.IndexService;
 import com.atguigu.gmall.index.utils.RedisLock;
@@ -82,6 +83,7 @@ public class IndexServiceImple implements IndexService {
 
 
     //最终优化方案，使用注解
+    @GmallCache(cachePreFix = "index:category:level2+3:")
     public List<CategoryEntity> getAllCates(Long cid) {
         ResponseVo<List<CategoryEntity>> listResponseVo = this.pmsClient.queryCategories(cid);
         List<CategoryEntity> categoryEntityList = listResponseVo.getData();

@@ -35,6 +35,13 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @GetMapping("getAll/{cid3}")
+    public ResponseVo<List<CategoryEntity>> queryAllCategoriesByLv3Id(@PathVariable("cid3")Long cid3) {
+        List<CategoryEntity> list = this.categoryService.queryAllCategoriesByLv3Id(cid3);
+        return ResponseVo.ok(list);
+    }
+
+
     /**
      * 根据parentId查询对应的类别的集合
      * @param parentId

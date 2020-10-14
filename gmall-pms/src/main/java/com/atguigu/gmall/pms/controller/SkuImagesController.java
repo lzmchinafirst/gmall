@@ -5,13 +5,7 @@ import java.util.List;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.atguigu.gmall.pms.entity.SkuImagesEntity;
 import com.atguigu.gmall.pms.service.SkuImagesService;
@@ -33,6 +27,12 @@ public class SkuImagesController {
 
     @Autowired
     private SkuImagesService skuImagesService;
+
+    @GetMapping("getImgs/{skuid}")
+    public ResponseVo<List<SkuImagesEntity>>  queryAllImagesBySkuId(@PathVariable("skuid")Long skuid) {
+        List<SkuImagesEntity> list = this.skuImagesService.queryAllImagesBySkuId(skuid);
+        return ResponseVo.ok(list);
+    }
 
     /**
      * 列表

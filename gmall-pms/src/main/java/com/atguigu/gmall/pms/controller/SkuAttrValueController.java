@@ -2,6 +2,7 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.vo.SaleAttrValueVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,24 @@ public class SkuAttrValueController {
 
     @Autowired
     private SkuAttrValueService skuAttrValueService;
+
+    @GetMapping("relationshap/{spuId}")
+    public ResponseVo<String> getSaleAndSkuRelationshap(@PathVariable("spuId")Long spuId) {
+        String relationshap = this.skuAttrValueService.getSaleAndSkuRelationshap(spuId);
+        return ResponseVo.ok(relationshap);
+    }
+
+    @GetMapping("getThis/{skuId}")
+    public ResponseVo<List<SkuAttrValueEntity>> queryAllSalesBySkuId(@PathVariable("skuId")Long skuId) {
+        List<SkuAttrValueEntity> list = this.skuAttrValueService.queryAllSalesBySkuId(skuId);
+        return ResponseVo.ok(list);
+    }
+
+    @GetMapping("sale/{spuId}")
+    public ResponseVo<List<SaleAttrValueVo>> queryAllSaleElementsBySpuId(@PathVariable("spuId")Long spuId) {
+        List<SaleAttrValueVo> list = this.skuAttrValueService.queryAllSaleElementsBySpuId(spuId);
+        return ResponseVo.ok(list);
+    }
 
     /**
      * 列表

@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atguigu.gmall.pms.mapper.SkuAttrValueMapper">
 
+    <select id="queryAllSaleElementsBySpuId" resultType="com.atguigu.gmall.pms.vo.AttrValueVo">
+        SELECT a.* FROM pms_sku_attr_value a INNER JOIN pms_sku b ON a.`sku_id` = b.`id` WHERE
+        b.`spu_id` = #{spuId}
+    </select>
+
+    <select id="getSaleAndSkuRelationshap" resultType="java.util.HashMap">
+        SELECT a.`sku_id`,GROUP_CONCAT(a.`attr_value`) as attr_values FROM pms_sku_attr_value a INNER JOIN pms_sku b ON a.`sku_id` = b.`id` WHERE
+        b.`spu_id` = #{spuId} GROUP BY a.`sku_id`
+    </select>
 </mapper>

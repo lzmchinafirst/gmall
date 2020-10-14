@@ -1,0 +1,38 @@
+
+server:
+  port: 19000
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
+  redis:
+    host: 192.168.111.168
+  zipkin:
+    base-url: http://localhost:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
+
+  rabbitmq:
+    host: 192.168.111.168
+    port: 5672
+    virtual-host: /lzm
+    username: lzm
+    password: lzm
+    listener:
+      simple:
+        prefetch: 1
+        concurrency: 3
+        acknowledge-mode: manual
+feign:
+  sentinel:
+    enabled: true
+
