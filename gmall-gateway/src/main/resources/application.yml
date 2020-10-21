@@ -34,16 +34,35 @@ spring:
         - id: index-route1
           uri: lb://index-service
           predicates:
-              - Host=gmall.com, www.gmall.com, gmall.index.com
+            - Host=gmall.com, www.gmall.com, index.gmall.com, lzm.com
         - id: index-route2
           uri: lb://index-service
           predicates:
-              - Path=/index/**
+            - Path=/index/**
         - id: item-route1
           uri: lb://item-service
           predicates:
-              - Path=/item/**
+            - Path=/item/**
         - id: item-route2
           uri: lb://item-service
           predicates:
-              - Host=item.gmall.com
+            - Host=item.gmall.com,item.lzm.com
+        - id: auth-route
+          uri: lb://auth-service
+          predicates:
+            - Host=sso.gmall.com, register.gmall.com
+        - id: cart-route
+          uri: lb://cart-service
+          predicates:
+            - Host=cart.gmall.com
+        - id: order-route
+          uri: lb://order-service
+          predicates:
+            - Host=order.gmall.com
+          filters:
+            - Auth=/
+gmall:
+  gateway:
+    jwt:
+      cookieName: GMALL-TOKEN
+      pubKeyPath: C:\Users\10982\Desktop\work_space\gmall\rsa\pub.rsa

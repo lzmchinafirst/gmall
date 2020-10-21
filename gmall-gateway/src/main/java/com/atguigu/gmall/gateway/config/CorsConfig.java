@@ -18,14 +18,14 @@ public class CorsConfig {
         config.addAllowedOrigin("http://manager.gmall.com");
         config.addAllowedOrigin("http://www.gmall.com");
         config.addAllowedOrigin("http://gmall.com");
-        config.addAllowedOrigin("http://gmall.index.com");
+        config.addAllowedOrigin("http://index.gmall.com");
+        config.addAllowedOrigin("http://lzm.com");
         // 允许的头信息
         config.addAllowedHeader("*");
         // 允许的请求方式
         config.addAllowedMethod("*");
         // 是否允许携带Cookie信息
         config.setAllowCredentials(true);
-
         // 添加映射路径，我们拦截一切请求
         UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
         corsConfigurationSource.registerCorsConfiguration("/**", config);

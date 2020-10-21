@@ -1,0 +1,48 @@
+server:
+  port: 18090
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+  zipkin:
+    base-url: http://localhost:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
+  redis:
+    host: 192.168.111.168
+  rabbitmq:
+    host: 192.168.111.168
+    virtual-host: /lzm
+    username: lzm
+    password: lzm
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 1
+        concurrency: 3
+    publisher-returns: true
+    publisher-confirm-type: correlated
+  thymeleaf:
+    cache: false
+feign:
+  sentinel:
+    enabled: true
+logging:
+  level:
+    com.atguigu.gmall: debug
+
+thread:
+  pool:
+    core: 100
+    max: 500
+    alive: 60
+    blocking: 1000

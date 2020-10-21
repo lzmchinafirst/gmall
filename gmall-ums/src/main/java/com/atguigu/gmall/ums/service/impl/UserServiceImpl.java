@@ -2,7 +2,6 @@ package com.atguigu.gmall.ums.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.gmall.common.bean.CodeModel;
-import com.atguigu.gmall.common.bean.DivException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -18,10 +17,8 @@ import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.ums.mapper.UserMapper;
 import com.atguigu.gmall.ums.entity.UserEntity;
 import com.atguigu.gmall.ums.service.UserService;
-
 import java.util.Date;
 import java.util.UUID;
-
 
 @Service("userService")
 @Slf4j

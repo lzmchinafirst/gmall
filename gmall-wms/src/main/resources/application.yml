@@ -24,6 +24,18 @@ spring:
     url: jdbc:mysql://localhost:3306/guli_wms?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: woshiniba123
+  rabbitmq:
+    host: 192.168.111.168
+    virtual-host: /lzm
+    username: lzm
+    password: lzm
+    listener:
+      simple:
+        prefetch: 1
+        concurrency: 3
+        acknowledge-mode: manual
+    publisher-returns: true
+    publisher-confirm-type: correlated
 
 mybatis-plus:
   mapper-locations: classpath:mapper/wms/*.xml
@@ -34,4 +46,3 @@ mybatis-plus:
 feign:
   sentinel:
     enabled: true
-

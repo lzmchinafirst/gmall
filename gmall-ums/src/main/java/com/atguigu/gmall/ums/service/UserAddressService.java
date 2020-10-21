@@ -5,6 +5,7 @@ import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.ums.entity.UserAddressEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,5 +18,7 @@ import java.util.Map;
 public interface UserAddressService extends IService<UserAddressEntity> {
 
     PageResultVo queryPage(PageParamVo paramVo);
+
+    List<UserAddressEntity> queryUserAddress(Long userId);
 }
 

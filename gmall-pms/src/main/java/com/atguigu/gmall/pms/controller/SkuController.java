@@ -1,11 +1,16 @@
 package com.atguigu.gmall.pms.controller;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +36,12 @@ import com.atguigu.gmall.common.bean.PageParamVo;
 @RestController
 @RequestMapping("pms/sku")
 public class SkuController {
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Autowired
     private SkuService skuService;
@@ -88,7 +99,10 @@ public class SkuController {
     @ApiOperation("修改")
     public ResponseVo update(@RequestBody SkuEntity sku){
 		skuService.updateById(sku);
-
+        this.rabbitTemplate.convertAndSend("GMALL.PMS.EXCHANGE","pms.price", JSON.toJSONString(sku));
+        ArrayList arrayList = new ArrayList();
+        LinkedList linkedList = new LinkedList();
+        linkedList.add("你好");
         return ResponseVo.ok();
     }
 

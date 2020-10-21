@@ -55,7 +55,8 @@ public class ItemServiceImpl implements ItemService {
             itemVo.setSubTitle(skuEntity.getSubtitle());
             itemVo.setPrice(skuEntity.getPrice());
             itemVo.setWeight(skuEntity.getWeight());
-            itemVo.setDefaltImage(skuEntity.getDefaultImage());
+            itemVo.setDefaultImage(skuEntity.getDefaultImage());
+            System.out.println(skuEntity.getDefaultImage());
             return skuEntity;
         }, threadPool);
         //2.根据cid3查询分类信息
@@ -122,7 +123,7 @@ public class ItemServiceImpl implements ItemService {
         CompletableFuture<Void> mappingCompletableFuture = skuEntityCompletableFuture.thenAcceptAsync((skuEntity) -> {
             ResponseVo<String> saleAndSkuRelationshap = this.pmsClient.getSaleAndSkuRelationshap(skuEntity.getSpuId());
             String skusJson = saleAndSkuRelationshap.getData();
-            itemVo.setSkusJson(skusJson);
+            itemVo.setSkuJsons(skusJson);
         }, threadPool);
         //11.根据spuId查询spu的海报信息
         CompletableFuture<Void> SeaLetter = skuEntityCompletableFuture.thenAcceptAsync(skuEntity -> {
