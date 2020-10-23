@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.atguigu.gmall.oms.entity.OrderEntity;
 import com.atguigu.gmall.oms.vo.OrderSubmitVo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,8 @@ import com.atguigu.gmall.oms.service.OrderService;
 import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
+
+import javax.xml.ws.Response;
 
 /**
  * 订单
@@ -33,6 +37,11 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @GetMapping("token/{orderSn}")
+    public ResponseVo<OrderEntity> getOrder(@PathVariable("orderSn")String orderToken) {
+        return ResponseVo.ok(this.orderService.getOne(new QueryWrapper<OrderEntity>().eq("order_sn",orderToken)));
+    }
 
     @PostMapping("{userId}")
     public ResponseVo<OrderEntity> saveOrder(@RequestBody OrderSubmitVo orderSubmitVo, @PathVariable("userId")Long userId) {
